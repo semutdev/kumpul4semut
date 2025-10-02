@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import '../styles/code-theme.css';
+import { SITE_CONFIG } from '../config';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description, image, type = 'website' } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = image
+  ? new URL(image, Astro.site)
+  : new URL('/og-image.png', Astro.site);
+
+const pageTitle = title === SITE_CONFIG.site.title ? title : `${title} | ${SITE_CONFIG.site.title}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{pageTitle}</title>
+    <meta name="title" content={pageTitle} />
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE_CONFIG.site.author} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#3182ce" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content={SITE_CONFIG.site.title} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google AdSense -->
+    {SITE_CONFIG.adsense.publisherId && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE_CONFIG.adsense.publisherId}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
+
+    <!-- Google Analytics -->
+    {SITE_CONFIG.analytics.googleAnalyticsId && (
+      <>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${SITE_CONFIG.analytics.googleAnalyticsId}`}
+        ></script>
+        <script is:inline define:vars={{ gaId: SITE_CONFIG.analytics.googleAnalyticsId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <slot name="header" />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <slot name="footer" />
+  </body>
+</html>

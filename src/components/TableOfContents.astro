@@ -1,0 +1,121 @@
+---
+export interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+export interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to only show h2 and h3 headings
+const tocHeadings = headings.filter((h) => h.depth <= 3);
+---
+
+{tocHeadings.length > 0 && (
+  <nav class="toc-container hidden lg:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto" aria-label="Table of contents">
+    <h2 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-3">
+      On this page
+    </h2>
+    <ul class="space-y-2 text-sm list-none m-0 p-0 border-l-2 border-gray-200">
+      {tocHeadings.map((heading) => (
+        <li class={`toc-item ${heading.depth === 3 ? 'ml-4' : ''}`}>
+          <a
+            href={`#${heading.slug}`}
+            class={`toc-link block py-1 px-4 text-gray-600 hover:text-blue-600 hover:border-blue-600 transition-colors no-underline border-l-2 border-transparent -ml-[2px] ${
+              heading.depth === 3 ? 'text-sm' : 'font-medium'
+            }`}
+            data-heading-id={heading.slug}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script>
+  // Highlight current section in TOC on scroll
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('id');
+          const tocLink = document.querySelector(`a[data-heading-id="${id}"]`);
+
+          if (tocLink) {
+            if (entry.isIntersecting) {
+              // Remove active class from all links
+              document.querySelectorAll('.toc-link').forEach((link) => {
+                link.classList.remove('active-toc-link');
+              });
+
+              // Add active class to current link
+              tocLink.classList.add('active-toc-link');
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '-100px 0px -66%',
+        threshold: 1.0,
+      }
+    );
+
+    // Observe all headings
+    document.querySelectorAll('article h2[id], article h3[id]').forEach((heading) => {
+      observer.observe(heading);
+    });
+
+    // Smooth scroll to heading on click
+    document.querySelectorAll('.toc-link').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href')?.slice(1);
+        const targetElement = document.getElementById(targetId || '');
+
+        if (targetElement) {
+          const yOffset = -80; // Account for sticky header
+          const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .toc-container {
+    max-width: 250px;
+  }
+
+  .toc-container::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .toc-container::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .toc-container::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 2px;
+  }
+
+  .active-toc-link {
+    color: #3182ce !important;
+    border-left-color: #3182ce !important;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1024px) {
+    .toc-container {
+      display: none;
+    }
+  }
+</style>
