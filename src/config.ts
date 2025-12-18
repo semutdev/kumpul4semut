@@ -1,15 +1,17 @@
 export const SITE_CONFIG = {
   site: {
-    title: "My Blog",
-    description: "A modern blog built with Astro",
-    author: "Your Name",
-    url: import.meta.env.SITE_URL || "https://yourdomain.com",
-    email: "your@email.com",
+    title: "Kumpul4Semut",
+    description: "Catatan ringan seorang programmer otodidak dari Dayeuhluhur.",
+    author: "Jujun Jamaludin",
+    url: import.meta.env.SITE_URL || "https://kumpul4semut.com",
+    email: "jamaludinjujun6@gmail.com",
   },
   social: {
-    github: "https://github.com/yourusername",
-    twitter: "https://twitter.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
+    github: "https://github.com/semutdev",
+    instagram: "https://instagram.com/semutdev",
+    facebook: "https://facebook.com/semutdev",
+    threads: "https://threads.net/@semutdev",
+    youtube: "https://youtube.com/@semutdev",
   },
   analytics: {
     googleAnalyticsId: import.meta.env.GOOGLE_ANALYTICS_ID || "",

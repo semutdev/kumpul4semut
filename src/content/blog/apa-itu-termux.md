@@ -3,12 +3,11 @@ title: "Apa Itu Termux, Apakah Aplikasi Hacking?"
 description: "Apa Itu Termux, Apakah Aplikasi Hacking?"
 pubDate: 2019-07-03T07:37:56+00:00
 heroImage: "/wp-content/uploads/2020/08/20190703_134254.png"
-tags: []
+tags: ['Termux']
 draft: false
 ---
 
-Siapa yang tidak kenal dengan aplikasi termux. Aplikasi yang dibuat [Fredrik Fornwall](https://play.google.com/store/apps/developer?id=Fredrik+Fornwall) mulai populer sejak rilisnya di play store. Sebelum di rilis di play store termux dirilis di githubnya pada 26 oktober 2015 dan masih [v0.17](https://github.com/termux/termux-app/releases/tag/v0.17) . Dan terus dikembangkan sampai akhirnya dirilis ke play store. [![termux](/wp-content/uploads/2019/07/20190703_134254-1024x576.png "termux")](/wp-content/uploads/2019/07/20190703_134254.png) Apa Itu Termux
-
+Siapa yang tidak kenal dengan aplikasi termux. Aplikasi yang dibuat [Fredrik Fornwall](https://play.google.com/store/apps/developer?id=Fredrik+Fornwall) mulai populer sejak rilisnya di play store. Sebelum di rilis di play store termux dirilis di githubnya pada 26 oktober 2015 dan masih [v0.17](https://github.com/termux/termux-app/releases/tag/v0.17) . Dan terus dikembangkan sampai akhirnya dirilis ke play store. 
 ## Apa Itu Termux?
 
  Termux merupakan terminal emulator untuk android dan merupakan aplikasi lingkungan linux yang bekerja secara langsung tanpa perlu rooting atau setup. Yang membedakan termux dengan aplikasi terminal android lainnya yaitu paket dalam termux itu lebih luas dan banyak. ## Apakah Bisa Termux Digunakan Untuk Hacking?
@@ -33,11 +32,12 @@ Siapa yang tidak kenal dengan aplikasi termux. Aplikasi yang dibuat [Fredrik For
 
  Untuk mendapatkan aplikasi ini kalian tinggal install di play store cek link nya [Download Termux](https://play.google.com/store/apps/details?id=com.termux) .Namun Kekurangan aplikasi termux ini hanya mampu berjalan di android versi 5.0 atau android lollypop. Untuk versi android dibawahnya belum bisa menggunakan aplikasi termux. ### Mengizinkan Akses Penyimpanan Untuk termux
 
- Setelah kalian install aplikasi termux. Ada satu pengaturan yang harus kalian atur terlebih dahulu karena termux belum secara otomatis mengaturnya. Hal yang perlu di atur adalah izin penyimpanannya. Jika kalian tidak mengizinkan penyimpanannya maka kalian tidak bisa mengakses penyimpanan kalian melalui termux ini. Cara mengizinkan akses penyimpanan termux: 1.Buka pengaturan handphone lalu cari aplikasi termux di menu aplikasi yang ada di pengaturan handphone. [![](/wp-content/uploads/2019/07/20190703_141523-1024x576.png)](/wp-content/uploads/2019/07/20190703_141523.png) 2.Pilih aplikasi termux tersebut sampai muncul info aplikasi lalu cari menu izin penyimpanan seperti pada gambar dibwawah ini. [![](/wp-content/uploads/2019/07/20190703_141649-1024x576.png)](/wp-content/uploads/2019/07/20190703_141649.png) 3.Pilih menu izin tersebut lalu izinkan penyimpanan untuk diakses termux. [![](/wp-content/uploads/2019/07/20190703_141724-1024x576.png)](/wp-content/uploads/2019/07/20190703_141724.png) Oke untuk mecoba mengakses penyimpanan internal di termux kalian bisa masukan command! ```bash
+ Setelah kalian install aplikasi termux. Ada satu pengaturan yang harus kalian atur terlebih dahulu karena termux belum secara otomatis mengaturnya. Hal yang perlu di atur adalah izin penyimpanannya. Jika kalian tidak mengizinkan penyimpanannya maka kalian tidak bisa mengakses penyimpanan kalian melalui termux ini. Cara mengizinkan akses penyimpanan termux: 1.Buka pengaturan handphone lalu cari aplikasi termux di menu aplikasi yang ada di pengaturan handphone. [![](/wp-content/uploads/2019/07/20190703_141523-1024x576.png)](/wp-content/uploads/2019/07/20190703_141523.png) 2.Pilih aplikasi termux tersebut sampai muncul info aplikasi lalu cari menu izin penyimpanan seperti pada gambar dibwawah ini. [![](/wp-content/uploads/2019/07/20190703_141649-1024x576.png)](/wp-content/uploads/2019/07/20190703_141649.png) 3.Pilih menu izin tersebut lalu izinkan penyimpanan untuk diakses termux. [![](/wp-content/uploads/2019/07/20190703_141724-1024x576.png)](/wp-content/uploads/2019/07/20190703_141724.png) Oke untuk mecoba mengakses penyimpanan internal di termux kalian bisa masukan command! 
+ ```bash
 cd /sdcard
 ```
-
- lalu kalian masukan! ```bash
+lalu kalian masukan! 
+```bash
 ls
 ```
 

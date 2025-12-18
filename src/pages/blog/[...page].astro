@@ -1,15 +1,15 @@
 ---
-import type { GetStaticPaths, Page } from 'astro';
-import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import BlogCard from '../../components/BlogCard.astro';
-import { sortPostsByDate, filterDrafts } from '../../content/config';
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { sortPostsByDate, filterDrafts } from "../../content/config";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = await getCollection('blog');
+  const allPosts = await getCollection("blog");
   const publishedPosts = sortPostsByDate(filterDrafts(allPosts));
 
   // Paginate with 12 posts per page
@@ -17,119 +17,134 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths;
 
 type Props = {
-  page: Page<CollectionEntry<'blog'>>;
+  page: Page<CollectionEntry<"blog">>;
 };
 
 const { page } = Astro.props;
 const currentPage = page.currentPage;
 ---
 
-<BaseLayout
-  title={`Blog - Page ${currentPage}`}
-  description="All blog posts"
->
+<BaseLayout title={`Blog - Page ${currentPage}`} description="All blog posts">
   <Header slot="header" />
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-32">
     <!-- Page Header -->
     <div class="mb-12">
       <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 mt-0">
-        All Posts
+        Semua Tulisan
       </h1>
       <p class="text-xl text-gray-600 dark:text-gray-400">
-        {page.total} {page.total === 1 ? 'post' : 'posts'} published
-        {page.lastPage > 1 && (
-          <span> • Page {currentPage} of {page.lastPage}</span>
-        )}
+        {page.total}
+        {page.total === 1 ? "post" : "posts"} published
+        {
+          page.lastPage > 1 && (
+            <span>
+              {" "}
+              • Page {currentPage} of {page.lastPage}
+            </span>
+          )
+        }
       </p>
     </div>
 
     <!-- Posts Grid -->
-    {page.data.length > 0 ? (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {page.data.map((post) => (
-          <BlogCard
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate}
-            slug={post.slug}
-            heroImage={post.data.heroImage}
-            tags={post.data.tags}
-            content={post.body}
-          />
-        ))}
-      </div>
-    ) : (
-      <div class="text-center py-20">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">No posts yet</h2>
-        <p class="text-gray-600 dark:text-gray-400">Check back soon for new content!</p>
-      </div>
-    )}
+    {
+      page.data.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {page.data.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              slug={post.slug}
+              tags={post.data.tags}
+              content={post.body}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-20">
+          <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            No posts yet
+          </h2>
+          <p class="text-gray-600 dark:text-gray-400">
+            Check back soon for new content!
+          </p>
+        </div>
+      )
+    }
 
     <!-- Pagination Controls -->
-    {page.lastPage > 1 && (
-      <nav class="flex justify-center items-center gap-2" aria-label="Pagination">
-        {/* Previous Button */}
-        {page.url.prev ? (
-          <a
-            href={page.url.prev}
-            class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline font-medium"
-            aria-label="Previous page"
-          >
-            ← Previous
-          </a>
-        ) : (
-          <span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 border border-gray-200 dark:border-gray-700 rounded-lg cursor-not-allowed">
-            ← Previous
+    {
+      page.lastPage > 1 && (
+        <nav
+          class="flex justify-center items-center gap-2"
+          aria-label="Pagination"
+        >
+          {/* Previous Button */}
+          {page.url.prev ? (
+            <a
+              href={page.url.prev}
+              class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline font-medium"
+              aria-label="Previous page"
+            >
+              ← Previous
+            </a>
+          ) : (
+            <span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 border border-gray-200 dark:border-gray-700 rounded-lg cursor-not-allowed">
+              ← Previous
+            </span>
+          )}
+
+          {/* Page Numbers */}
+          <div class="hidden sm:flex gap-2">
+            {Array.from({ length: page.lastPage }, (_, i) => i + 1).map(
+              (pageNum) => {
+                const isCurrentPage = pageNum === currentPage;
+                const pageUrl = pageNum === 1 ? "/blog" : `/blog/${pageNum}`;
+
+                return isCurrentPage ? (
+                  <span
+                    class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg font-medium"
+                    aria-current="page"
+                  >
+                    {pageNum}
+                  </span>
+                ) : (
+                  <a
+                    href={pageUrl}
+                    class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline"
+                    aria-label={`Go to page ${pageNum}`}
+                  >
+                    {pageNum}
+                  </a>
+                );
+              },
+            )}
+          </div>
+
+          {/* Mobile page indicator */}
+          <span class="sm:hidden px-4 py-2 text-gray-700 dark:text-gray-300">
+            Page {currentPage} of {page.lastPage}
           </span>
-        )}
 
-        {/* Page Numbers */}
-        <div class="hidden sm:flex gap-2">
-          {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => {
-            const isCurrentPage = pageNum === currentPage;
-            const pageUrl = pageNum === 1 ? '/blog' : `/blog/${pageNum}`;
-
-            return isCurrentPage ? (
-              <span
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium"
-                aria-current="page"
-              >
-                {pageNum}
-              </span>
-            ) : (
-              <a
-                href={pageUrl}
-                class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline"
-                aria-label={`Go to page ${pageNum}`}
-              >
-                {pageNum}
-              </a>
-            );
-          })}
-        </div>
-
-        {/* Mobile page indicator */}
-        <span class="sm:hidden px-4 py-2 text-gray-700 dark:text-gray-300">
-          Page {currentPage} of {page.lastPage}
-        </span>
-
-        {/* Next Button */}
-        {page.url.next ? (
-          <a
-            href={page.url.next}
-            class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline font-medium"
-            aria-label="Next page"
-          >
-            Next →
-          </a>
-        ) : (
-          <span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 border border-gray-200 dark:border-gray-700 rounded-lg cursor-not-allowed">
-            Next →
-          </span>
-        )}
-      </nav>
-    )}
+          {/* Next Button */}
+          {page.url.next ? (
+            <a
+              href={page.url.next}
+              class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors no-underline font-medium"
+              aria-label="Next page"
+            >
+              Next →
+            </a>
+          ) : (
+            <span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 border border-gray-200 dark:border-gray-700 rounded-lg cursor-not-allowed">
+              Next →
+            </span>
+          )}
+        </nav>
+      )
+    }
   </div>
 
   <Footer slot="footer" />

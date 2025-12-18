@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import { filterDrafts } from '../content/config';
+import { getCollection } from "astro:content";
+import { filterDrafts } from "../content/config";
 
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection("blog");
 const posts = filterDrafts(allPosts);
 
-const searchData = posts.map(post => ({
+const searchData = posts.map((post) => ({
   title: post.data.title,
   description: post.data.description,
   slug: post.slug,
@@ -21,25 +21,43 @@ const searchData = posts.map(post => ({
     aria-label="Search posts"
   >
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
     </svg>
     <span class="hidden md:inline">Search</span>
-    <kbd class="hidden md:inline px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 rounded text-gray-700 dark:text-gray-300">⌘K</kbd>
+    <kbd
+      class="hidden md:inline px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 rounded text-gray-700 dark:text-gray-300"
+      >⌘K</kbd
+    >
   </button>
 </div>
 
 <!-- Search Modal -->
-<div id="search-modal" class="fixed inset-0 z-50 hidden">
+<div id="search-modal" class="fixed inset-0 z-[10000] hidden">
   <div class="fixed inset-0 bg-black bg-opacity-50" id="search-backdrop"></div>
 
   <div class="fixed inset-0 overflow-y-auto">
     <div class="flex min-h-full items-start justify-center p-4 pt-20">
-      <div class="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-lg shadow-2xl">
+      <div
+        class="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-lg shadow-2xl"
+      >
         <!-- Search Input -->
         <div class="p-4 border-b border-gray-200 dark:border-gray-700">
           <div class="relative">
-            <svg class="absolute left-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <svg
+              class="absolute left-3 top-3.5 w-5 h-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
             <input
               type="text"
@@ -54,16 +72,23 @@ const searchData = posts.map(post => ({
         <!-- Search Results -->
         <div id="search-results" class="max-h-96 overflow-y-auto p-4">
           <div id="results-list"></div>
-          <div id="no-results" class="hidden text-center py-8 text-gray-500 dark:text-gray-400">
+          <div
+            id="no-results"
+            class="hidden text-center py-8 text-gray-500 dark:text-gray-400"
+          >
             No posts found
           </div>
         </div>
 
         <!-- Search Help -->
-        <div class="p-4 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-gray-400">
+        <div
+          class="p-4 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-gray-400"
+        >
           <div class="flex items-center justify-between">
             <span>Type to search</span>
-            <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs">ESC to close</kbd>
+            <kbd class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs"
+              >ESC to close</kbd
+            >
           </div>
         </div>
       </div>
@@ -75,21 +100,21 @@ const searchData = posts.map(post => ({
   // Wait for DOM to be ready
   function initSearch() {
     // Search functionality
-    const searchButton = document.getElementById('search-button');
-    const searchModal = document.getElementById('search-modal');
-    const searchBackdrop = document.getElementById('search-backdrop');
-    const searchInput = document.getElementById('search-input');
-    const resultsList = document.getElementById('results-list');
-    const noResults = document.getElementById('no-results');
+    const searchButton = document.getElementById("search-button");
+    const searchModal = document.getElementById("search-modal");
+    const searchBackdrop = document.getElementById("search-backdrop");
+    const searchInput = document.getElementById("search-input");
+    const resultsList = document.getElementById("results-list");
+    const noResults = document.getElementById("no-results");
 
     if (!searchButton || !searchModal) {
-      console.error('Search elements not found');
+      console.error("Search elements not found");
       return;
     }
 
     function openSearch() {
       if (searchModal) {
-        searchModal.classList.remove('hidden');
+        searchModal.classList.remove("hidden");
         if (searchInput) {
           setTimeout(() => searchInput.focus(), 100);
         }
@@ -98,92 +123,105 @@ const searchData = posts.map(post => ({
 
     function closeSearch() {
       if (searchModal) {
-        searchModal.classList.add('hidden');
+        searchModal.classList.add("hidden");
       }
       if (searchInput) {
-        searchInput.value = '';
+        searchInput.value = "";
       }
       if (resultsList) {
-        resultsList.innerHTML = '';
+        resultsList.innerHTML = "";
       }
       if (noResults) {
-        noResults.classList.add('hidden');
+        noResults.classList.add("hidden");
       }
     }
 
     function search(query) {
       if (!query.trim()) {
-        if (resultsList) resultsList.innerHTML = '';
-        if (noResults) noResults.classList.add('hidden');
+        if (resultsList) resultsList.innerHTML = "";
+        if (noResults) noResults.classList.add("hidden");
         return;
       }
 
       const lowerQuery = query.toLowerCase();
-      const results = searchData.filter(post =>
-        post.title.toLowerCase().includes(lowerQuery) ||
-        post.description.toLowerCase().includes(lowerQuery) ||
-        post.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+      const results = searchData.filter(
+        (post) =>
+          post.title.toLowerCase().includes(lowerQuery) ||
+          post.description.toLowerCase().includes(lowerQuery) ||
+          post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)),
       );
 
       if (results.length === 0) {
-        if (resultsList) resultsList.innerHTML = '';
-        if (noResults) noResults.classList.remove('hidden');
+        if (resultsList) resultsList.innerHTML = "";
+        if (noResults) noResults.classList.remove("hidden");
         return;
       }
 
-      if (noResults) noResults.classList.add('hidden');
+      if (noResults) noResults.classList.add("hidden");
 
       if (resultsList) {
-        resultsList.innerHTML = results.map(post => `
+        resultsList.innerHTML = results
+          .map(
+            (post) => `
           <a href="/blog/${post.slug}/" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors border border-transparent hover:border-blue-500 mb-2">
             <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-1">${post.title}</h3>
             <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">${post.description}</p>
-            ${post.tags.length > 0 ? `
+            ${
+              post.tags.length > 0
+                ? `
               <div class="flex gap-2 mt-2">
-                ${post.tags.slice(0, 3).map(tag =>
-                  `<span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">${tag}</span>`
-                ).join('')}
+                ${post.tags
+                  .slice(0, 3)
+                  .map(
+                    (tag) =>
+                      `<span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">${tag}</span>`,
+                  )
+                  .join("")}
               </div>
-            ` : ''}
+            `
+                : ""
+            }
           </a>
-        `).join('');
+        `,
+          )
+          .join("");
       }
     }
 
     // Event listeners
-    searchButton.addEventListener('click', (e) => {
+    searchButton.addEventListener("click", (e) => {
       e.preventDefault();
       openSearch();
     });
 
     if (searchBackdrop) {
-      searchBackdrop.addEventListener('click', closeSearch);
+      searchBackdrop.addEventListener("click", closeSearch);
     }
 
     if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
+      searchInput.addEventListener("input", (e) => {
         search(e.target.value);
       });
     }
 
     // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener("keydown", (e) => {
       // Cmd/Ctrl + K to open search
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         openSearch();
       }
 
       // ESC to close search
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         closeSearch();
       }
     });
   }
 
   // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSearch);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSearch);
   } else {
     initSearch();
   }

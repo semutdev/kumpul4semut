@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
 import '../styles/code-theme.css';
+import '../styles/code-theme.css';
 import { SITE_CONFIG } from '../config';
+import SearchModal from '../components/SearchModal.astro';
 
 export interface Props {
   title: string;
@@ -37,7 +39,7 @@ const pageTitle = title === SITE_CONFIG.site.title ? title : `${title} | ${SITE_
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#3182ce" />
+    <meta name="theme-color" content="#ffffff" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
@@ -97,5 +99,6 @@ const pageTitle = title === SITE_CONFIG.site.title ? title : `${title} | ${SITE_
     </main>
 
     <slot name="footer" />
+    <SearchModal />
   </body>
 </html>
