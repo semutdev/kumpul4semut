@@ -96,9 +96,9 @@ const pageTitle = title === SITE_CONFIG.site.title ? title : `${title} | ${SITE_
 
     <main id="main-content">
       <slot />
+      <SearchModal />
     </main>
 
     <slot name="footer" />
-    <SearchModal />
   </body>
 </html>
