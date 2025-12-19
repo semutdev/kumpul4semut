@@ -15,8 +15,9 @@
   --color-border: #e0e0e0;
   --color-code-bg: #f5f5f5;
 
-  /* Typography - Clean & Readable */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Typography - Book Reading Experience */
+  --font-sans: 'Merriweather', 'Georgia', 'Times New Roman', serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', monospace;
 
   /* Spacing */
