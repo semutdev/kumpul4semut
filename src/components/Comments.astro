@@ -95,7 +95,7 @@ const {
         setTimeout(() => {
           const iframe = document.querySelector('iframe.giscus-frame');
           if (iframe) {
-            const theme = document.documentElement.classList.contains('dark')
+            const currentTheme = document.documentElement.classList.contains('dark')
               ? 'dark'
               : 'light';
 
@@ -103,7 +103,7 @@ const {
               {
                 giscus: {
                   setConfig: {
-                    theme: theme
+                    theme: currentTheme
                   }
                 }
               },
