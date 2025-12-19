@@ -27,7 +27,22 @@ const showAd = SITE_CONFIG.adsense.publisherId;
 )}
 
 <script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
+  // Wait for AdSense to be loaded before pushing ads
+  function initAd() {
+    if (window.adsbygoogle) {
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (error) {
+        console.warn('AdSense initialization failed:', error);
+      }
+    } else {
+      // If AdSense is not loaded yet, wait a bit and try again
+      setTimeout(initAd, 100);
+    }
+  }
+
+  // Initialize the ad
+  initAd();
 </script>
 
 <style>
