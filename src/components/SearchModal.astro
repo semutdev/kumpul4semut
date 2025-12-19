@@ -15,12 +15,29 @@ const searchData = posts.map((post) => ({
 
 <!-- Search Modal -->
 <div id="search-modal" class="fixed inset-0 z-[9999] hidden">
-    <!-- Full screen backdrop -->
-    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" id="search-backdrop"></div>
-
     <!-- Modal container - centered in viewport -->
-    <div class="fixed inset-0 flex items-center justify-center p-4">
-        <div class="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl transform transition-all">
+    <div class="fixed inset-0 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="modal-content relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl transform transition-all" id="search-modal-content">
+            <!-- Modal Header with Close Button -->
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <span>Pencarian Catatan</span>
+                </div>
+                <button
+                    type="button"
+                    id="search-close-btn"
+                    class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    aria-label="Tutup pencarian"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
             <!-- Search Input -->
                 <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                     <div class="relative">
@@ -179,9 +196,35 @@ const searchData = posts.map((post) => ({
             });
         });
 
-        if (searchBackdrop) {
-            searchBackdrop.addEventListener("click", closeSearch);
+        // Close button functionality
+        const searchCloseBtn = document.getElementById("search-close-btn");
+        if (searchCloseBtn) {
+            searchCloseBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                closeSearch();
+            });
+
+            // Touch support for mobile
+            searchCloseBtn.addEventListener("touchend", (e) => {
+                e.preventDefault();
+                closeSearch();
+            });
         }
+
+        // Optional: Close when clicking outside the modal content
+        const modalContent = document.getElementById("search-modal-content");
+        if (modalContent) {
+            modalContent.addEventListener("click", (e) => {
+                e.stopPropagation();
+            });
+        }
+
+        // Add backdrop click to close (optional - works on desktop)
+        searchModal.addEventListener("click", (e) => {
+            if (e.target === searchModal) {
+                closeSearch();
+            }
+        });
 
         if (searchInput) {
             searchInput.addEventListener("input", (e) => {
@@ -218,5 +261,41 @@ const searchData = posts.map((post) => ({
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    /* Search modal styles */
+    #search-modal {
+        cursor: default;
+    }
+
+    .modal-content {
+        cursor: default;
+        -webkit-tap-highlight-color: transparent;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Close button styles */
+    #search-close-btn {
+        -webkit-tap-highlight-color: transparent;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+        .modal-content {
+            max-height: 95vh;
+            margin: 1rem;
+            width: calc(100% - 2rem);
+        }
+
+        #search-close-btn {
+            min-width: 48px;
+            min-height: 48px;
+        }
     }
 </style>

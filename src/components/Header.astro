@@ -23,25 +23,25 @@ function isActive(href: string, currentPath: string): boolean {
 <header
   class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-lg transition-all"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
+  <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16 min-w-0">
       <!-- Logo / Site Title -->
-      <div class="flex-shrink-0">
+      <div class="flex-shrink-0 min-w-0">
         <a
           href="/"
-          class="flex items-center gap-3 text-xl font-medium text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors no-underline"
+          class="flex items-center gap-2 sm:gap-3 text-lg sm:text-xl font-medium text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors no-underline"
         >
           <img
             src="/images/logo.png"
             alt="Kumpul4Semut Logo"
-            class="h-10 w-auto dark:hidden"
+            class="h-8 sm:h-10 w-auto dark:hidden flex-shrink-0"
           />
           <img
             src="/images/logo-white.png"
             alt="Kumpul4Semut Logo"
-            class="h-10 w-auto hidden dark:block"
+            class="h-8 sm:h-10 w-auto hidden dark:block flex-shrink-0"
           />
-          <span>{SITE_CONFIG.site.title}</span>
+          <span class="hidden xs:inline sm:inline truncate">{SITE_CONFIG.site.title}</span>
         </a>
       </div>
 
@@ -80,9 +80,16 @@ function isActive(href: string, currentPath: string): boolean {
       </nav>
 
       <!-- Mobile Actions -->
-      <div class="md:hidden flex items-center gap-2">
-        <Search />
-        <ThemeSwitcher />
+      <div class="md:hidden flex items-center gap-1">
+        <!-- Search Button -->
+        <div class="flex items-center p-1">
+          <Search />
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <div class="flex items-center p-1">
+          <ThemeSwitcher />
+        </div>
 
         <!-- Mobile Menu Button -->
         <button

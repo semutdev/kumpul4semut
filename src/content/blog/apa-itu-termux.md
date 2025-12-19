@@ -85,5 +85,5 @@ Aplikasi termux itu sangat bermanfaat. Namun tergantung kita memanfaatkannya jan
 
 Kalian bisa membaca artikel tentang termux kami yang mungkin berguna sebagai berikut:
 
-- [Memunculkan tombol kiri kanan termux](https://www.kumpul4semut.com/cara-munculin-tombol-kiri-kanan-termux-terbaru/)
-- [Memberi warna pada termux](https://www.kumpul4semut.com/cara-memberi-warna-pada-kode-script-terminal-dan-termux-command-prompt/)
+- [Memunculkan tombol kiri kanan termux](blog/cara-munculin-tombol-kiri-kanan-termux-terbaru/)
+- [Memberi warna pada termux](blog/cara-memberi-warna-pada-kode-script-terminal-dan-termux-command-prompt/)
