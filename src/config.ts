@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
   site: {
     title: "Kumpul4Semut",
-    description: "Catatan ringan seorang programmer otodidak dari Dayeuhluhur.",
+    description: "Catatan ringan seorang programmer otodidak.",
     author: "Jujun Jamaludin",
     url: import.meta.env.SITE_URL || "https://kumpul4semut.com",
     email: "jamaludinjujun6@gmail.com",
