@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import ShareButtons from "../components/ShareButtons.astro";
 import Comments from "../components/Comments.astro";
+import AdSense from "../components/AdSense.astro";
 import { formatDate, readingTime } from "../utils/helpers";
 import { SITE_CONFIG } from "../config";
 
@@ -134,6 +135,13 @@ const hasToc = tocHeadings.length > 0;
             </div>
           </div>
 
+          <!-- AdSense Advertisement - After Article Content -->
+          <AdSense
+            slot="1234567890"
+            format="rectangle"
+            className="article-ad"
+          />
+
           <!-- Comments Section -->
           {SITE_CONFIG.features.comments && <Comments />}
         </div>
@@ -218,6 +226,13 @@ const hasToc = tocHeadings.length > 0;
               </div>
             </div>
           </div>
+
+          <!-- AdSense Advertisement - After Article Content -->
+          <AdSense
+            slot="1234567890"
+            format="rectangle"
+            className="article-ad"
+          />
 
           <!-- Comments Section -->
           {SITE_CONFIG.features.comments && <Comments />}

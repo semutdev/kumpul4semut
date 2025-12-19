@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BlogCard from "../components/BlogCard.astro";
+import AdSense from "../components/AdSense.astro";
 import { SITE_CONFIG } from "../config";
 import { sortPostsByDate, filterDrafts } from "../content/config";
 
@@ -92,6 +93,17 @@ const recentPosts = publishedPosts.slice(0, 6);
           </div>
         )
       }
+    </div>
+  </section>
+
+  <!-- AdSense Advertisement - Before Footer -->
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <AdSense
+        slot="9876543210"
+        format="horizontal"
+        className="home-ad"
+      />
     </div>
   </section>
 

@@ -1,0 +1,91 @@
+---
+import { SITE_CONFIG } from "../config";
+
+export interface Props {
+  slot: string;
+  format?: string;
+  className?: string;
+}
+
+const { slot, format = "auto", className = "" } = Astro.props;
+
+// Only show ads if AdSense publisher ID is configured
+const showAd = SITE_CONFIG.adsense.publisherId;
+---
+
+{showAd && (
+  <div class={`adsense-container ${className}`}>
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client={SITE_CONFIG.adsense.publisherId}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    ></ins>
+  </div>
+)}
+
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<style>
+  .adsense-container {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  /* Responsive ad container */
+  .adsbygoogle {
+    display: block;
+    width: 100%;
+    min-height: 250px;
+  }
+
+  /* Ad container styling */
+  .adsense-container.article-ad {
+    margin: 3rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .adsense-container.home-ad {
+    margin: 3rem auto;
+    max-width: 728px;
+  }
+
+  /* Dark mode support */
+  .dark .adsense-container {
+    filter: brightness(0.9);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .adsense-container {
+      margin: 1.5rem 0;
+    }
+
+    .adsbygoogle {
+      min-height: 200px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .adsbygoogle {
+      min-height: 280px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .adsense-container.home-ad .adsbygoogle {
+      min-height: 90px;
+    }
+  }
+
+  /* Prevent layout shift */
+  .adsense-container {
+    contain: layout;
+  }
+</style>

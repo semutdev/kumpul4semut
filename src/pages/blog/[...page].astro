@@ -6,6 +6,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import BlogCard from "../../components/BlogCard.astro";
+import AdSense from "../../components/AdSense.astro";
 import { sortPostsByDate, filterDrafts } from "../../content/config";
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -146,6 +147,17 @@ const currentPage = page.currentPage;
       )
     }
   </div>
+
+  <!-- AdSense Advertisement - Before Footer -->
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <AdSense
+        slot="9876543210"
+        format="horizontal"
+        className="home-ad"
+      />
+    </div>
+  </section>
 
   <Footer slot="footer" />
 </BaseLayout>
