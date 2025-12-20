@@ -316,6 +316,139 @@ const hasToc = tocHeadings.length > 0;
     )}
   </article>
 
+  <!-- Mobile TOC Floating Button & Drawer (only show if hasToc) -->
+  {hasToc && (
+    <>
+      <!-- Floating TOC Button (visible on mobile only) -->
+      <button
+        id="mobile-toc-button"
+        class="lg:hidden fixed bottom-6 left-6 z-50 w-14 h-14 bg-slate-700 hover:bg-slate-800 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+        aria-label="Open Table of Contents"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- TOC Drawer Overlay -->
+      <div
+        id="mobile-toc-overlay"
+        class="lg:hidden fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-opacity duration-300"
+      ></div>
+
+      <!-- TOC Drawer -->
+      <div
+        id="mobile-toc-drawer"
+        class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 rounded-t-2xl shadow-2xl transform translate-y-full transition-transform duration-300 max-h-[70vh] overflow-hidden"
+      >
+        <!-- Drawer Handle -->
+        <div class="flex justify-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+        </div>
+
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+            Daftar Isi
+          </h3>
+          <button
+            id="mobile-toc-close"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+            aria-label="Close Table of Contents"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Drawer Content -->
+        <nav class="overflow-y-auto max-h-[50vh] px-6 py-4" aria-label="Mobile Table of Contents">
+          <ul class="space-y-1 list-none m-0 p-0">
+            {tocHeadings.map((heading) => (
+              <li>
+                <a
+                  href={`#${heading.slug}`}
+                  class={`mobile-toc-link block py-3 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800 hover:text-slate-700 dark:hover:text-slate-300 transition-colors no-underline ${
+                    heading.depth === 3 ? 'ml-4 text-sm' : 'font-medium'
+                  }`}
+                  data-heading-id={heading.slug}
+                >
+                  {heading.depth === 3 && (
+                    <span class="text-gray-400 mr-2">—</span>
+                  )}
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Mobile TOC Script -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const tocButton = document.getElementById('mobile-toc-button');
+          const tocDrawer = document.getElementById('mobile-toc-drawer');
+          const tocOverlay = document.getElementById('mobile-toc-overlay');
+          const tocClose = document.getElementById('mobile-toc-close');
+
+          function openDrawer() {
+            tocDrawer?.classList.remove('translate-y-full');
+            tocOverlay?.classList.remove('opacity-0', 'pointer-events-none');
+            tocOverlay?.classList.add('opacity-100');
+            document.body.style.overflow = 'hidden';
+          }
+
+          function closeDrawer() {
+            tocDrawer?.classList.add('translate-y-full');
+            tocOverlay?.classList.add('opacity-0', 'pointer-events-none');
+            tocOverlay?.classList.remove('opacity-100');
+            document.body.style.overflow = '';
+          }
+
+          // Open drawer on button click
+          tocButton?.addEventListener('click', openDrawer);
+
+          // Close drawer on overlay click
+          tocOverlay?.addEventListener('click', closeDrawer);
+
+          // Close drawer on close button click
+          tocClose?.addEventListener('click', closeDrawer);
+
+          // Close drawer and scroll to heading on link click
+          document.querySelectorAll('.mobile-toc-link').forEach((link) => {
+            link.addEventListener('click', (e) => {
+              e.preventDefault();
+              closeDrawer();
+              
+              const targetId = link.getAttribute('href')?.slice(1);
+              const targetElement = document.getElementById(targetId || '');
+
+              if (targetElement) {
+                setTimeout(() => {
+                  const yOffset = -80;
+                  const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }, 300);
+              }
+            });
+          });
+
+          // Close drawer on escape key
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              closeDrawer();
+            }
+          });
+        });
+      </script>
+    </>
+  )}
+
 <style>
   @import "../styles/torn-paper.css";
 </style>
