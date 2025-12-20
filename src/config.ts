@@ -21,6 +21,7 @@ export const SITE_CONFIG = {
     slotIds: {
       home: import.meta.env.ADSENSE_SLOT_HOME || "",
       article: import.meta.env.ADSENSE_SLOT_ARTICLE || "",
+      inArticle: import.meta.env.ADSENSE_SLOT_IN_ARTICLE || "",
     },
   },
   pagination: {

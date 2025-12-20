@@ -4,10 +4,11 @@ import { SITE_CONFIG } from "../config";
 export interface Props {
   slot: string;
   format?: string;
+  layout?: string;
   className?: string;
 }
 
-const { slot, format = "auto", className = "" } = Astro.props;
+const { slot, format = "auto", layout, className = "" } = Astro.props;
 
 // Only show ads if AdSense publisher ID is configured
 const showAd = SITE_CONFIG.adsense.publisherId;
@@ -17,10 +18,11 @@ const showAd = SITE_CONFIG.adsense.publisherId;
   <div class={`adsense-container ${className}`}>
     <ins
       class="adsbygoogle"
-      style="display: block"
+      style="display: block; text-align: center;"
       data-ad-client={SITE_CONFIG.adsense.publisherId}
       data-ad-slot={slot}
       data-ad-format={format}
+      data-ad-layout={layout}
       data-full-width-responsive="true"
     ></ins>
   </div>

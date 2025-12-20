@@ -234,6 +234,49 @@ const hasToc = tocHeadings.length > 0;
             className="article-ad"
           />
 
+          <!-- In-Article Ad Injection Script -->
+          {SITE_CONFIG.adsense.slotIds.inArticle && (
+            <script define:vars={{ 
+              publisherId: SITE_CONFIG.adsense.publisherId,
+              slotId: SITE_CONFIG.adsense.slotIds.inArticle 
+            }}>
+              document.addEventListener('DOMContentLoaded', () => {
+                const articleContent = document.querySelector('.prose');
+                if (!articleContent) return;
+
+                const paragraphs = articleContent.querySelectorAll('p');
+                // Inject after 3rd paragraph if exists, otherwise after 1st
+                const targetParagraph = paragraphs[2] || paragraphs[0];
+
+                if (targetParagraph) {
+                  const adContainer = document.createElement('div');
+                  adContainer.className = 'adsense-container in-article-ad';
+                  adContainer.style.margin = '2rem 0';
+                  adContainer.style.textAlign = 'center';
+                  
+                  const ins = document.createElement('ins');
+                  ins.className = 'adsbygoogle';
+                  ins.style.display = 'block';
+                  ins.style.textAlign = 'center';
+                  ins.setAttribute('data-ad-layout', 'in-article');
+                  ins.setAttribute('data-ad-format', 'fluid');
+                  ins.setAttribute('data-ad-client', publisherId);
+                  ins.setAttribute('data-ad-slot', slotId);
+                  
+                  adContainer.appendChild(ins);
+                  targetParagraph.parentNode.insertBefore(adContainer, targetParagraph.nextSibling);
+                  
+                  // Push ad
+                  try {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                  } catch (e) {
+                    console.error('AdSense push failed', e);
+                  }
+                }
+              });
+            </script>
+          )}
+
           <!-- Comments Section -->
           {SITE_CONFIG.features.comments && <Comments />}
         </div>
