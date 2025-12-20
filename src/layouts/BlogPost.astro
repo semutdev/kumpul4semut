@@ -58,181 +58,209 @@ const hasToc = tocHeadings.length > 0;
 
         <!-- Main Content -->
         <div class="order-2 lg:max-w-4xl">
-          <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden">
-            <!-- Article Header -->
-            <header class="p-6 md:p-8 border-b border-gray-200 dark:border-gray-700">
-              <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 mt-0 leading-tight">
-                {title}
-              </h1>
+          <!-- Paper with Shadow Wrapper -->
+          <div class="relative group">
+            <!-- Shadow for floating effect -->
+            <div class="absolute inset-0 bg-black/10 blur-xl transform translate-y-2 translate-x-1 torn-corner rounded-sm"></div>
 
-              <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-300 mb-4">
-                <time datetime={pubDate.toISOString()}>
-                  {formatDate(pubDate)}
-                </time>
-                <span>•</span>
-                <span>{estimatedReadingTime}</span>
+            <!-- Paper Container -->
+            <div class="relative shadow-sm torn-corner paper-texture border-l-4 border-stone-300">
+              <!-- Book Spine Line -->
+              <div class="absolute left-4 top-0 bottom-0 w-px bg-red-200/50 pointer-events-none z-10"></div>
+
+              <!-- Article Header -->
+              <header class="p-8 md:p-12 border-b border-stone-200 border-dashed relative z-20">
+                {tags && tags.length > 0 && (
+                  <span class="text-xs font-bold uppercase tracking-widest text-orange-600 block mb-2">
+                    {tags[0]}
+                  </span>
+                )}
+                
+                <h1 class="text-4xl md:text-5xl font-serif font-bold text-stone-800 mb-6 mt-0 leading-tight">
+                  {title}
+                </h1>
+
+                <div class="flex flex-wrap items-center gap-4 text-sm text-stone-500 font-serif italic">
+                  <span class="font-bold not-italic text-stone-700">By {SITE_CONFIG.site.author}</span>
+                  <span>•</span>
+                  <time datetime={pubDate.toISOString()}>
+                    {formatDate(pubDate)}
+                  </time>
+                  <span>•</span>
+                  <span>{estimatedReadingTime}</span>
+                  {
+                    updatedDate && (
+                      <>
+                        <span>•</span>
+                        <span>Updated {formatDate(updatedDate)}</span>
+                      </>
+                    )
+                  }
+                </div>
+
                 {
-                  updatedDate && (
-                    <>
-                      <span>•</span>
-                      <span>Updated {formatDate(updatedDate)}</span>
-                    </>
+                  heroImage && (
+                    <div class="mt-8 flex justify-center">
+                      <img
+                        src={heroImage}
+                        alt={title}
+                        class="max-w-full h-auto rounded-sm shadow-md border border-stone-200 grayscale hover:grayscale-0 transition-all duration-500"
+                        loading="eager"
+                      />
+                    </div>
                   )
                 }
+              </header>
+
+              <!-- Article Content -->
+              <div class="prose prose-lg md:prose-xl max-w-none p-8 md:p-12 font-serif leading-relaxed text-stone-800 relative z-20">
+                <slot />
               </div>
 
-              {
-                tags && tags.length > 0 && (
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    {tags.map((tag) => (
-                      <a
-                        href={`/tags/${tag}`}
-                        class="inline-block px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors no-underline border border-gray-300 dark:border-gray-600"
-                      >
-                        {tag}
-                      </a>
-                    ))}
+              <!-- Share Buttons -->
+              <div class="p-8 md:p-12 border-t border-stone-200 border-dashed bg-stone-50/50 relative z-20">
+                <ShareButtons title={title} url={canonicalURL.toString()} />
+              </div>
+
+              <!-- Author Info -->
+              <div class="p-8 md:p-12 border-t border-stone-200 border-dashed relative z-20">
+                <div class="flex items-center gap-4">
+                  <div class="flex-1">
+                    <h3 class="text-lg font-serif font-bold text-stone-800 mt-0 mb-2">
+                      About the Author
+                    </h3>
+                    <p class="text-stone-600 mb-0 leading-relaxed font-serif italic">
+                      {SITE_CONFIG.site.description}
+                    </p>
                   </div>
-                )
-              }
-
-              {
-                heroImage && (
-                  <div class="flex justify-center mb-6">
-                    <img
-                      src={heroImage}
-                      alt={title}
-                      class="max-w-md w-full h-auto rounded-lg shadow-md"
-                      loading="eager"
-                    />
-                  </div>
-                )
-              }
-            </header>
-
-            <!-- Article Content -->
-            <div class="prose prose-lg md:prose-xl max-w-none p-6 md:p-8 font-serif leading-relaxed text-gray-800 dark:text-gray-100">
-              <slot />
-            </div>
-
-            <!-- Share Buttons -->
-            <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-              <ShareButtons title={title} url={canonicalURL.toString()} />
-            </div>
-
-            <!-- Author Info -->
-            <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-              <div class="flex items-center gap-4">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mt-0 mb-2">
-                    {SITE_CONFIG.site.author}
-                  </h3>
-                  <p class="text-gray-600 dark:text-gray-300 mb-0 leading-relaxed">
-                    {SITE_CONFIG.site.description}
-                  </p>
                 </div>
+              </div>
+              
+              <!-- Decorative Element Bottom Right -->
+              <div class="absolute bottom-6 right-6 opacity-20 transform rotate-12 pointer-events-none z-10">
+                <svg width="60" height="60" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 5L35 35M5 35L35 5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+                </svg>
               </div>
             </div>
           </div>
 
-          <!-- AdSense Advertisement - After Article Content -->
-          <AdSense
-            slot={SITE_CONFIG.adsense.slotIds.article}
-            format="rectangle"
-            className="article-ad"
-          />
+          <!-- AdSense Advertisement - After Article Content (Outside Paper) -->
+          <div class="mt-8">
+            <AdSense
+              slot={SITE_CONFIG.adsense.slotIds.article}
+              format="rectangle"
+              className="article-ad"
+            />
+          </div>
 
-          <!-- Comments Section -->
-          {SITE_CONFIG.features.comments && <Comments />}
+          <!-- Comments Section (Outside Paper) -->
+          {SITE_CONFIG.features.comments && (
+            <div class="mt-8">
+              <Comments />
+            </div>
+          )}
         </div>
       </div>
     ) : (
       // Centered layout without TOC
       <div class="flex justify-center">
         <div class="w-full lg:max-w-4xl xl:max-w-3xl">
-          <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden">
-            <!-- Article Header -->
-            <header class="p-6 md:p-8 border-b border-gray-200 dark:border-gray-700">
-              <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 mt-0 leading-tight">
-                {title}
-              </h1>
+          <!-- Paper with Shadow Wrapper -->
+          <div class="relative group">
+            <!-- Shadow for floating effect -->
+            <div class="absolute inset-0 bg-black/10 blur-xl transform translate-y-2 translate-x-1 torn-corner rounded-sm"></div>
 
-              <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-300 mb-4">
-                <time datetime={pubDate.toISOString()}>
-                  {formatDate(pubDate)}
-                </time>
-                <span>•</span>
-                <span>{estimatedReadingTime}</span>
+            <!-- Paper Container -->
+            <div class="relative shadow-sm torn-corner paper-texture border-l-4 border-stone-300">
+              <!-- Book Spine Line -->
+              <div class="absolute left-4 top-0 bottom-0 w-px bg-red-200/50 pointer-events-none z-10"></div>
+
+              <!-- Article Header -->
+              <header class="p-8 md:p-12 border-b border-stone-200 border-dashed relative z-20">
+                {tags && tags.length > 0 && (
+                  <span class="text-xs font-bold uppercase tracking-widest text-orange-600 block mb-2">
+                    {tags[0]}
+                  </span>
+                )}
+                
+                <h1 class="text-4xl md:text-5xl font-serif font-bold text-stone-800 mb-6 mt-0 leading-tight">
+                  {title}
+                </h1>
+
+                <div class="flex flex-wrap items-center gap-4 text-sm text-stone-500 font-serif italic">
+                  <span class="font-bold not-italic text-stone-700">By {SITE_CONFIG.site.author}</span>
+                  <span>•</span>
+                  <time datetime={pubDate.toISOString()}>
+                    {formatDate(pubDate)}
+                  </time>
+                  <span>•</span>
+                  <span>{estimatedReadingTime}</span>
+                  {
+                    updatedDate && (
+                      <>
+                        <span>•</span>
+                        <span>Updated {formatDate(updatedDate)}</span>
+                      </>
+                    )
+                  }
+                </div>
+
                 {
-                  updatedDate && (
-                    <>
-                      <span>•</span>
-                      <span>Updated {formatDate(updatedDate)}</span>
-                    </>
+                  heroImage && (
+                    <div class="mt-8 flex justify-center">
+                      <img
+                        src={heroImage}
+                        alt={title}
+                        class="max-w-full h-auto rounded-sm shadow-md border border-stone-200 grayscale hover:grayscale-0 transition-all duration-500"
+                        loading="eager"
+                      />
+                    </div>
                   )
                 }
+              </header>
+
+              <!-- Article Content -->
+              <div class="prose prose-lg md:prose-xl max-w-none p-8 md:p-12 font-serif leading-relaxed text-stone-800 relative z-20">
+                <slot />
               </div>
 
-              {
-                tags && tags.length > 0 && (
-                  <div class="flex flex-wrap gap-2 mb-6">
-                    {tags.map((tag) => (
-                      <a
-                        href={`/tags/${tag}`}
-                        class="inline-block px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors no-underline border border-gray-300 dark:border-gray-600"
-                      >
-                        {tag}
-                      </a>
-                    ))}
+              <!-- Share Buttons -->
+              <div class="p-8 md:p-12 border-t border-stone-200 border-dashed bg-stone-50/50 relative z-20">
+                <ShareButtons title={title} url={canonicalURL.toString()} />
+              </div>
+
+              <!-- Author Info -->
+              <div class="p-8 md:p-12 border-t border-stone-200 border-dashed relative z-20">
+                <div class="flex items-center gap-4">
+                  <div class="flex-1">
+                    <h3 class="text-lg font-serif font-bold text-stone-800 mt-0 mb-2">
+                      About the Author
+                    </h3>
+                    <p class="text-stone-600 mb-0 leading-relaxed font-serif italic">
+                      {SITE_CONFIG.site.description}
+                    </p>
                   </div>
-                )
-              }
-
-              {
-                heroImage && (
-                  <div class="flex justify-center mb-6">
-                    <img
-                      src={heroImage}
-                      alt={title}
-                      class="max-w-md w-full h-auto rounded-lg shadow-md"
-                      loading="eager"
-                    />
-                  </div>
-                )
-              }
-            </header>
-
-            <!-- Article Content -->
-            <div class="prose prose-lg md:prose-xl max-w-none p-6 md:p-8 font-serif leading-relaxed text-gray-800 dark:text-gray-100">
-              <slot />
-            </div>
-
-            <!-- Share Buttons -->
-            <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-              <ShareButtons title={title} url={canonicalURL.toString()} />
-            </div>
-
-            <!-- Author Info -->
-            <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-              <div class="flex items-center gap-4">
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white mt-0 mb-2">
-                    {SITE_CONFIG.site.author}
-                  </h3>
-                  <p class="text-gray-600 dark:text-gray-300 mb-0 leading-relaxed">
-                    {SITE_CONFIG.site.description}
-                  </p>
                 </div>
+              </div>
+              
+              <!-- Decorative Element Bottom Right -->
+              <div class="absolute bottom-6 right-6 opacity-20 transform rotate-12 pointer-events-none z-10">
+                <svg width="60" height="60" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 5L35 35M5 35L35 5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+                </svg>
               </div>
             </div>
           </div>
 
-          <!-- AdSense Advertisement - After Article Content -->
-          <AdSense
-            slot={SITE_CONFIG.adsense.slotIds.article}
-            format="rectangle"
-            className="article-ad"
-          />
+          <!-- AdSense Advertisement - After Article Content (Outside Paper) -->
+          <div class="mt-8">
+            <AdSense
+              slot={SITE_CONFIG.adsense.slotIds.article}
+              format="rectangle"
+              className="article-ad"
+            />
+          </div>
 
           <!-- In-Article Ad Injection Script -->
           {SITE_CONFIG.adsense.slotIds.inArticle && (
@@ -278,11 +306,19 @@ const hasToc = tocHeadings.length > 0;
           )}
 
           <!-- Comments Section -->
-          {SITE_CONFIG.features.comments && <Comments />}
+          {SITE_CONFIG.features.comments && (
+            <div class="mt-8">
+              <Comments />
+            </div>
+          )}
         </div>
       </div>
     )}
   </article>
+
+<style>
+  @import "../styles/torn-paper.css";
+</style>
 
   <Footer slot="footer" />
 </BaseLayout>

@@ -1,0 +1,100 @@
+/* Torn Paper Effect */
+.torn-corner {
+    clip-path: polygon(0% 0%,
+            100% 0%,
+            100% 85%,
+            92% 88%,
+            95% 92%,
+            88% 95%,
+            85% 100%,
+            0% 100%);
+}
+
+/* Paper Texture */
+.paper-texture {
+    background-image: url("/images/p6.png");
+    background-color: #fdfbf7;
+    /* Light mode paper color */
+}
+
+/* Dark Mode Paper Texture */
+:global(.dark) .paper-texture {
+    background-image: url("/images/p6.png");
+    /* Keep texture but darken */
+    background-color: #1e293b;
+    /* Slate-800 for dark mode paper */
+    background-blend-mode: overlay;
+    border-left-color: #475569;
+    /* Slate-600 for border */
+}
+
+/* Book Spine Effect */
+.book-spine {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgba(254, 202, 202, 0.5);
+    /* red-200/50 */
+}
+
+:global(.dark) .book-spine {
+    background-color: rgba(248, 113, 113, 0.3);
+    /* red-400/30 */
+}
+
+/* Code Block Styling */
+.code-block {
+    font-family: 'Fira Code', monospace;
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 1rem;
+    /* Add padding */
+    border-radius: 0.5rem;
+}
+
+/* Ensure padding for Astro generated code blocks in dark mode */
+:global(.dark) .prose pre {
+    padding: 1.25rem !important;
+}
+
+:global(.dark) .prose code {
+    padding: 0.2rem 0.4rem;
+}
+
+/* Dark Mode Text Readability Overrides - Scoped to Paper Texture only */
+:global(.dark) .paper-texture .text-stone-800 {
+    color: #e2e8f0 !important;
+    /* Slate-200 */
+}
+
+:global(.dark) .paper-texture .text-stone-700 {
+    color: #cbd5e1 !important;
+    /* Slate-300 */
+}
+
+:global(.dark) .paper-texture .text-stone-600 {
+    color: #94a3b8 !important;
+    /* Slate-400 */
+}
+
+:global(.dark) .paper-texture .text-stone-500 {
+    color: #64748b !important;
+    /* Slate-500 */
+}
+
+:global(.dark) .paper-texture .border-stone-300 {
+    border-color: #475569 !important;
+    /* Slate-600 */
+}
+
+:global(.dark) .paper-texture .border-stone-200 {
+    border-color: #334155 !important;
+    /* Slate-700 */
+}
+
+:global(.dark) .paper-texture .bg-stone-50\/50 {
+    background-color: rgba(30, 41, 59, 0.5) !important;
+    /* Slate-800/50 */
+}
