@@ -24,7 +24,8 @@ jika sudah diinstall harusnya sekarang ada folder JDK nya di program files seper
 
 ![](/wp-content/uploads/2022/08/Pasted.png)selanjutnya masuk ke setting environment, caranya ketika aja environment di window nanti ada menu **edit the system environment** lalu pilih **environment variable.** tambah variable baru dengan klik new masukan data sebagai berikut
 
-![](/wp-content/uploads/2022/08/Pasted-1.png)### Langkah 2: Menginstall SDK Manager
+![](/wp-content/uploads/2022/08/Pasted-1.png)
+### Langkah 2: Menginstall SDK Manager
 
 Syarat yang kedua untuk menggunakan react native harus menginstall beberapa SDK dari android studio, nah karena kita tidak mau menginstall android studio maka kita akan install SDK nya manual dan yang diperlukan saja.
 
@@ -43,31 +44,28 @@ Oke jika sdk manager nya sudah terinstall sekarang kita install beberapa SDK pac
 #### 1. Install Platform Tools (ADB & Fastboot)
 
 ```bash
-```
 sdkmanager "platform-tools"
-```bash
+```
 #### 2. Install Platform
 
 ```bash
-```
 sdkmanager "platforms;android-30"
-```bash
+```
 #### 3. Add System Image
 
 ```bash
-```
 sdkmanager "system-images;android-30;google_apis;x86_64"
-```bash
-```bash
 ```
-sdkmanager "system-images;android-30;google_apis_playstore;x86_64"
+
 ```bash
+sdkmanager "system-images;android-30;google_apis_playstore;x86_64"
+```
 #### 4. Install Build Tools
 
 ```bash
-```
 sdkmanager "build-tools;30.0.3"
-```bash
+```
+
 Oke jika sdk nya sudah berhasil terinstall semua sekarang temen temen bisa install react nativenya, oh ya disini untuk emulatornya saya pakai real device jadi tidak install emulator biar tambah ringan.
 
 Referensi 1: <https://dev.to/shivams136/how-to-install-android-sdk-without-android-studio-ff2>

@@ -7,11 +7,12 @@ tags: []
 draft: false
 ---
 
-Tutorial CRUD codeigniter 4 dengan react js kali ini sampi pada menampilkan data. Setelah sebelumnya kita [Tutorial CRUD codeigniter 4 dengan react js Create Data](https://www.kumpul4semut.com/tutorial-lengkap-crud-codeigniter-4-dan-react-js-2-create-data/) . Untuk kalian yang belum lihat tutorial sebelumnya mending dilihat dulu ya. [![show data codeigniter 4 react js](/wp-content/uploads/2020/07/ci4plusreact-show-1024x590.jpg)](/wp-content/uploads/2020/07/ci4plusreact-show.jpg) show data codeigniter 4 react js Baik langsung saja kita masuk ke langkah-langkahnya
+Tutorial CRUD codeigniter 4 dengan react js kali ini sampi pada menampilkan data. Setelah sebelumnya kita [Tutorial CRUD codeigniter 4 dengan react js Create Data](https://www.kumpul4semut.com/tutorial-lengkap-crud-codeigniter-4-dan-react-js-2-create-data/) . Untuk kalian yang belum lihat tutorial sebelumnya mending dilihat dulu ya. show data codeigniter 4 react js Baik langsung saja kita masuk ke langkah-langkahnya
 
 ## Membuat method rest api show data codeigniter 4
 
- Langsung buka controller quotes nya yang telah dibuat di tutorial sebelumnya berada pada **app/Controllers/Quotes.php** . lalu masukan kode ```bash
+ Langsung buka controller quotes nya yang telah dibuat di tutorial sebelumnya berada pada **app/Controllers/Quotes.php** . lalu masukan kode 
+ ```php
 <?php
 
 namespace App\Controllers;
@@ -50,9 +51,11 @@ class Quotes extends ResourceController
 }
 ```
 
- Penjelasan! Disini terdapat method baru bernama index dan method tersebut akan menampilkan semua data dari tabel quotes. Tidak usah edit untuk modelsnya karena fungsi findAll merupakan fungsi quoery builder baru pada codeigniter 4. ### Menggunakan api show data codeigniter 4 di react js
+ Penjelasan! Disini terdapat method baru bernama index dan method tersebut akan menampilkan semua data dari tabel quotes. Tidak usah edit untuk modelsnya karena fungsi findAll merupakan fungsi quoery builder baru pada codeigniter 4. 
+ ## Menggunakan api show data codeigniter 4 di react js
 
- Oke setelah rest api sudah dibuat kita tinggal mainkan rest api tersebut di react jsnya. Langsung buka saja file **react/src/components/Home.js** . Tambah kodenya jadi seperti ini: ```bash
+ Oke setelah rest api sudah dibuat kita tinggal mainkan rest api tersebut di react jsnya. Langsung buka saja file **react/src/components/Home.js** . Tambah kodenya jadi seperti ini: 
+ ```javascript
 import React, { Component } from "react";
 
 export default class Home extends Component {
@@ -103,10 +106,6 @@ export default class Home extends Component {
 
   render() {
     return (
-      
-        
-          
-            
               <form onSubmit={this.handleSubmit}>
                 <label>
                   <input
@@ -123,7 +122,6 @@ export default class Home extends Component {
                   value="Add Quotes"
                 />
               </form>
-            
            <table class="table table-hover">
               <thead>
                 <tr>
@@ -155,9 +153,6 @@ export default class Home extends Component {
                 })}
               </tbody>
             </table>
-          
-        
-      
     );
   }
 }

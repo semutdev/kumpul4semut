@@ -6,16 +6,13 @@ heroImage: "/wp-content/uploads/2020/08/Termux-Panah-Kiri_kanan.jpg"
 tags: ["termux", "tutorial", "android", "linux"]
 draft: false
 ---
-
-![Munculkan Panah Kiri Kanan termux](/wp-content/uploads/2019/03/Termux-Panah-Kiri_kanan-300x225.jpg)
-
 # Atasi Panah Kiri Kanan Termux yang Hilang
 
 **TERMUX** - Merupakan terminal emulator layaknya linux di perangkat komputer. Perintah linux yang ada di komputer kalian bisa jalankan di aplikasi termux ini hanya dengan menggunakan perangkat android.
 
 Namun ada sedikit perbedaan untuk menjalankan perintah-perintahnya. Jika di komputer kalian menggunakan kata `sudo apt get`, maka di termux kalian cukup ketik saja `pkg`.
 
-Baca Juga: [Apa Itu Termux, Apakah Aplikasi Hacking?](https://www.kumpul4semut.com/apa-itu-termux/)
+Baca Juga: [Apa Itu Termux, Apakah Aplikasi Hacking?](/blog/apa-itu-termux/)
 
 Aplikasi ini sudah didownload sekitar satu juta pengguna di play store saat artikel ini dibuat. Dan mungkin akan terus bertambah karena aplikasi ini sangat bermanfaat khususnya buat programmer. Karena dengan fitur yang ditawarkan, kalian bisa menjalankan berbagai bahasa pemrograman.
 

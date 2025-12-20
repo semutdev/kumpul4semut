@@ -7,13 +7,14 @@ tags: []
 draft: false
 ---
 
-Create data Codeigniter 4 dan React js Setelah sebelumnya kita [mempersiapan project penggabungan codeigniter 4 dengan react js](https://www.kumpul4semut.com/fullstack-codeigniter-4-dan-react-js-1-persiapan/) selesai. Sekarang kita akan coba menambah data ke dalam database. Disini kita akan membuat aplikasi quotes yaitu aplikasi berbagi status. [![codeigniter 4 react js create data](/wp-content/uploads/2020/06/ci4plusreactcreate-1024x590.jpg)](/wp-content/uploads/2020/06/ci4plusreactcreate.jpg) codeigniter 4 react js create data
+Create data Codeigniter 4 dan React js Setelah sebelumnya kita [mempersiapan project penggabungan codeigniter 4 dengan react js](https://www.kumpul4semut.com/fullstack-codeigniter-4-dan-react-js-1-persiapan/) selesai. Sekarang kita akan coba menambah data ke dalam database. Disini kita akan membuat aplikasi quotes yaitu aplikasi berbagi status. 
 
 ## Pembuatan rest api codeigniter 4 create data
 
 ### Langkah 1 : Membuat database dan setting env
 
- Baik langsung saja karena kita akan berkenalan dengan database silahkan teman-teman buat dahulu nama databasenya. Lalu ubah nama file env di root folder menjadi .env atau bisa buat file bare agar file env asli tidak terhapus. Lalu setting bagian database .env ```bash
+ Baik langsung saja karena kita akan berkenalan dengan database silahkan teman-teman buat dahulu nama databasenya. Lalu ubah nama file env di root folder menjadi .env atau bisa buat file bare agar file env asli tidak terhapus. Lalu setting bagian database .env 
+```php
 database.default.hostname = localhost
 database.default.database = ci4
 database.default.username = root
@@ -21,13 +22,16 @@ database.default.password =
 database.default.DBDriver = MySQLi
 ```
 
- Penjelasan! Disini saya membuat database bernama ci4 dan saya menggunakan xmpp window 10 jadi untuk passwordnya saya kosongkan. Teman-teman sesuaikan saja. ### Langkah 2 : Membuat tabel quotes dengan php spark codeigniter 4
+ Penjelasan! Disini saya membuat database bernama ci4 dan saya menggunakan xmpp window 10 jadi untuk passwordnya saya kosongkan. Teman-teman sesuaikan saja. 
+### Langkah 2 : Membuat tabel quotes dengan php spark codeigniter 4
 
- Buka terminal line masukan perintah: ```bash
+ Buka terminal line masukan perintah: 
+```bash
 php spark migrate:create quotes
 ```
 
- Baik jika teman-teman mau buat aplikasi lain bisa di sesuaikan tabelnya saja. Selanjutnya akan terbentuk file migrationnya. silahkan buka file **app/Config/Database/Migration** Buka file **.php** yang ujungnya ada **\_quotes.** Misalnya file 2020-06-21-041849\_quotes.php Lalu masukan kode berikut: ```bash
+ Baik jika teman-teman mau buat aplikasi lain bisa di sesuaikan tabelnya saja. Selanjutnya akan terbentuk file migrationnya. silahkan buka file **app/Config/Database/Migration** Buka file **.php** yang ujungnya ada **\_quotes.** Misalnya file 2020-06-21-041849\_quotes.php Lalu masukan kode berikut: 
+```php
 <?php
 
 namespace App\Database\Migrations;
@@ -63,17 +67,21 @@ class Quotes extends Migration
 }
 ```
 
- Disini saya hanya membuat 2 kolom yaitu quote\_id untuk primary key yang auto increment dan kolom quotes type varchar. Baik jika dirasa cukup tabelnya teman-teman bisa jalan perintah berikut di terminal line untuk menjalankan file migrationnya: ```bash
+ Disini saya hanya membuat 2 kolom yaitu quote\_id untuk primary key yang auto increment dan kolom quotes type varchar. Baik jika dirasa cukup tabelnya teman-teman bisa jalan perintah berikut di terminal line untuk menjalankan file migrationnya: 
+```bash
 php spark migrate
 ```
 
- Maka akan terbentuk tabel baru teman-teman bisa pastikan dengan phpmyadmin. Atau jika belum terbiasa membuat tabel dengan migration bisa buat manual saja pakai phpmyadminnya. ### Langkah 3 : Membuat routes rest api codeigniter 4
+ Maka akan terbentuk tabel baru teman-teman bisa pastikan dengan phpmyadmin. Atau jika belum terbiasa membuat tabel dengan migration bisa buat manual saja pakai phpmyadminnya. 
+### Langkah 3 : Membuat routes rest api codeigniter 4
 
- Langsung saja buka filenya di **app/Config/Routes.php** tambah kode berikut ```bash
+ Langsung saja buka filenya di **app/Config/Routes.php** tambah kode berikut 
+```php
 $routes->resource('quotes');
 ```
 
- Penjelasnnya! kode routes satu baris tersebut sudah mencakup seluruh kebutuhan crud untuk rest api dengan codeigniter 4. Itu setara dengan routes ```bash
+ Penjelasnnya! kode routes satu baris tersebut sudah mencakup seluruh kebutuhan crud untuk rest api dengan codeigniter 4. Itu setara dengan routes 
+```php
 $routes->get('quotes/new',             'Quotes::new');
 $routes->post('quotes',                'Quotes::create');
 $routes->get('quotes',                 'Quotes::index');
@@ -84,9 +92,11 @@ $routes->patch('quotes/(:segment)',    'Quotes::update/$1');
 $routes->delete('quotes/(:segment)',   'Quotes::delete/$1');
 ```
 
- Jadi cukup sebaris yang tadi saja. Ya walaupun kita tidak akan pakai semua langsung kali ini kita hanya butuh ### langkah 4 : Membuat controller untuk rest api codeigniter 4
+ Jadi cukup sebaris yang tadi saja. Ya walaupun kita tidak akan pakai semua langsung kali ini kita hanya butuh 
+### langkah 4 : Membuat controller untuk rest api codeigniter 4
 
- Silahkan langsung buat file baru bernama **Quotes.php** di **app/Controllers/** ingat nama file controllers harus diawali huruf kapital. Isi controllernya sebagai berikut: ```bash
+ Silahkan langsung buat file baru bernama **Quotes.php** di **app/Controllers/** ingat nama file controllers harus diawali huruf kapital. Isi controllernya sebagai berikut: 
+ ```php
 <?php
 
 namespace App\Controllers;
@@ -120,9 +130,11 @@ class Quotes extends ResourceController
 }
 ```
 
- Penjelasannya!. Di controller quotes tersebut itu extend ke ResourceController yang merupakai package terbaru dari codeigniter 4 untuk memudahkan dalam pembuatan rest api. Lalu disitu terdapat 1 method untuk create. Disitu sudah konek ke models tapi modelsnya belum kita buat mari kita buat juga modelsnya. ### Langkah 5 : Membuat model rest api codeigniter 4
+ Penjelasannya!. Di controller quotes tersebut itu extend ke ResourceController yang merupakai package terbaru dari codeigniter 4 untuk memudahkan dalam pembuatan rest api. Lalu disitu terdapat 1 method untuk create. Disitu sudah konek ke models tapi modelsnya belum kita buat mari kita buat juga modelsnya. 
+### Langkah 5 : Membuat model rest api codeigniter 4
 
- Buat file baru di **app/Models**  dengan nama **Quotes\_model.php** Berikut kodenya: ```bash
+ Buat file baru di **app/Models**  dengan nama **Quotes\_model.php** Berikut kodenya: 
+ ```php
 <?php
 
 namespace App\Models;
@@ -142,11 +154,13 @@ class Quotes_model extends Model
 }
 ```
 
- Baik sampai sini kita sudah berhasil membuat api create data atau tambah data menggunakan codeigniter 4. Selanjutnya kita akan pakai api tersebut dengan react js. ## Tambah data atau create data react js include codeigniter 4
+ Baik sampai sini kita sudah berhasil membuat api create data atau tambah data menggunakan codeigniter 4. Selanjutnya kita akan pakai api tersebut dengan react js. 
+## Tambah data atau create data react js include codeigniter 4
 
 ### Langkah 1 : Persiapan views codeigniter
 
- Baik disini kita akan pakai boostrap untuk templatenya jadi silahkan masukan kode ke view codigeniternya .Karena saya belum mengubah view deafultnya jadi saya mengubah viewnya di file **app/Views/welcome\_message.php** ```bash
+ Baik disini kita akan pakai boostrap untuk templatenya jadi silahkan masukan kode ke view codigeniternya .Karena saya belum mengubah view deafultnya jadi saya mengubah viewnya di file **app/Views/welcome\_message.php** 
+ ```php
 <html lang="en">
 
 <head>
@@ -165,11 +179,13 @@ class Quotes_model extends Model
 	<!-- end from react -->
 	<script src="/dist/main.js" charset="utf-8"></script>
 
+</html>
 ```
 
 ### Langkah 2 : Membuat component react js
 
- Kalian bisa simpan di folder react nya buat saja folder baru bernama src yang didalamanya ada folder components Component header ```bash
+ Kalian bisa simpan di folder react nya buat saja folder baru bernama src yang didalamanya ada folder components Component header 
+```javascript
 import React, { Component } from "react";
 
 export default class Header extends Component {
@@ -207,7 +223,8 @@ export default class Header extends Component {
 }
 ```
 
- component home ```bash
+ component home 
+```javascript
 import React, { Component } from "react";
 
 export default class Home extends Component {
@@ -276,7 +293,8 @@ export default class Home extends Component {
 }
 ```
 
- Lalu load semua components di app.js ```bash
+ Lalu load semua components di app.js 
+```javascript
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Header from "./src/components/Header";
@@ -296,7 +314,8 @@ export default class App extends Component {
 ReactDOM.render(<App />, document.getElementById("app"));
 ```
 
- Baik buat teman teman yang bingung tentang susunan foldernya [![struktur folder codeigniter 4 dengan react js](/wp-content/uploads/2020/06/ci4reactstruktur-1024x576.jpg)](/wp-content/uploads/2020/06/ci4reactstruktur.jpg) Penjelasanya! Saya mengubah path react dari tutorial sebelunya menjadi folder react untuk mengubahnya kalian bisa ubah di file **webpack.config.js** dibagian entry. Lalu didalam folder reactnya saya buat file app.js yang sama seperti tutorial sebelumnya dan didalamnya saya membuat folder **src/components**  Jangan lupa jika kalian mengubah file react js nya kalian harus menjalankan kode berikut di terminal line ```bash
+ Baik buat teman teman yang bingung tentang susunan foldernya [![struktur folder codeigniter 4 dengan react js](/wp-content/uploads/2020/06/ci4reactstruktur-1024x576.jpg)](/wp-content/uploads/2020/06/ci4reactstruktur.jpg) Penjelasanya! Saya mengubah path react dari tutorial sebelunya menjadi folder react untuk mengubahnya kalian bisa ubah di file **webpack.config.js** dibagian entry. Lalu didalam folder reactnya saya buat file app.js yang sama seperti tutorial sebelumnya dan didalamnya saya membuat folder **src/components**  Jangan lupa jika kalian mengubah file react js nya kalian harus menjalankan kode berikut di terminal line 
+```bash
 webpack --watch
 ```
 

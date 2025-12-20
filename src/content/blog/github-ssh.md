@@ -11,15 +11,13 @@ draft: false
 
 SSH merupakan salah satu cara untuk melakukan koneksi dari git ke github. Selain menggunakan SSH, ada cara yang lebih mudah yaitu menggunakan metode **HTTPS**. Kekurangannya, kalian harus selalu memasukkan username dan password kalian ketika ingin melakukan push repo ke github.
 
-![Github ssh](/wp-content/uploads/2019/07/20190705_132124-1024x576.png)
-
 Agar kita bisa menggunakan SSH GitHub ini, kita harus melakukan beberapa pengaturan dahulu.
 
 ## 1. Menginstall SSH
 
 Untuk melakukan pengaturan pada SSH, sebelumnya kita harus menginstall SSH dahulu di terminal kita. Oke kali ini kita akan menggunakan aplikasi android kesukaan yaitu termux.
 
-Baca juga: [Cara Membuat Website Create SSH](https://www.kumpul4semut.com/cara-membuat-website-create-ssh-dan-vpn-menggunkaan-php/)
+Baca juga: [Cara Membuat Website Create SSH](/blog/cara-membuat-website-create-ssh-dan-vpn-menggunkaan-php/)
 
 Masukkan perintah berikut untuk menginstall SSH di termux:
 
@@ -119,7 +117,7 @@ ssh -T git@github.com
 
 ![Test SSH Connection](/wp-content/uploads/2019/07/20190705_134131-1024x576.png)
 
-Setelah itu kalian bisa gunakan fitur SSH ini ketika remote, clone, push, pull, dll. Atau baca: [Perintah Dasar Git dan Github](https://www.kumpul4semut.com/perintah-dasar-git-yang-wajib-diketahui-dan-sering-digunakan/)
+Setelah itu kalian bisa gunakan fitur SSH ini ketika remote, clone, push, pull, dll. Atau baca: [Perintah Dasar Git dan Github](blog/perintah-dasar-git-yang-wajib-diketahui-dan-sering-digunakan/)
 
 Jadi begitu cara mengkonekan GitHub dengan menggunakan SSH. Jika terjadi error lagi, silahkan ulangi langkah ke 3. Sekian, semoga bermanfaat.
 

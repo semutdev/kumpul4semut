@@ -11,8 +11,6 @@ draft: false
 
 Framework CodeIgniter baru saja meluncurkan versi terbarunya yaitu CodeIgniter 4. CodeIgniter memang salah satu framework favorit saya, bahkan saya sudah terbiasa dengan CodeIgniter 3. Karena sudah ada versi terbaru, maka tak salah saya harus mencobanya.
 
-![CRUD Codeigniter 4 dan React.js](/wp-content/uploads/2020/06/ci4plusreact-Recovered-1024x590.jpg)
-
 Agar lebih keren, kita akan mencoba frontendnya menggunakan framework yang cukup terkenal juga yaitu React.js. Framework React.js diciptakan oleh perusahaan Facebook, jadi kita sebagai seorang yang suka mencoba tak salah mencobanya karena kita tahu Facebook sangat keren.
 
 Untuk menggabungkan CodeIgniter dengan React, menurut saya ada 2 jenis pendekatan:

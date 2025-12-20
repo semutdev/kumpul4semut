@@ -7,8 +7,6 @@ tags: ['Python', 'Pemrograman', 'Android', 'Sintaks']
 draft: false
 ---
 
-> [![Sintaks Python](/wp-content/uploads/2019/06/20190606_203326-1024x576.png)](/wp-content/uploads/2019/06/20190606_203326.png)
-
 Sintaks penulisan kode python cukup mudah dipahami dibandingkan bahasa lain yang lumayan rumit. Penulisannya relatif sederhana namun ada beberapa perbedaan antara python versi 1 dan python versi 3 yang sering disebut python3. Di seri kali ini kita akan belajar python versi tiga.
 
 Kita harus mematuhi aturan penulisan tiap bahasan pemrograman agar kode kita bisa berjalan dengan baik. Jika sintaks penulisan kode python dilanggar maka kode yang kita buat akan error. Jadi kita harus tahu aturan penulisan kode python tersebut khususnya python 3 yang akan kita bahas kali ini.
@@ -26,7 +24,6 @@ Bisa dilihat cukup seperti itu saja bisa berjalan tanpa diakhiri tanda titik kom
 ## Sintaks Tanda Petik Python
 
 Tanda petik memang setiap bahasa pemrograman selalu dipakai biasanya digunakan pada tipe data string. Untuk python sendiri bisa menggunakan tanda petik pada penulisan kode stringnya. Contoh:
-
 ```python
 nama = "Jujun Jamaludin"
 nama = 'Jujun Jamaludin'
