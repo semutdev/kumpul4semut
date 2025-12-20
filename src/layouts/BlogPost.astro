@@ -459,8 +459,42 @@ const hasToc = tocHeadings.length > 0;
   }
 
   .dark .prose pre {
-    background-color: #1f2937;
-    border-color: #374151;
+    background-color: #0d1117;
+    border-color: #30363d;
+    padding: 1.5em;
+  }
+
+  /* Shiki/rehype-pretty-code generated elements */
+  .prose pre > code {
+    display: block;
+    padding: 0;
+    background: transparent !important;
+  }
+
+  .prose [data-rehype-pretty-code-figure] pre {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .dark .prose [data-rehype-pretty-code-figure] pre {
+    background-color: #0d1117 !important;
+    border: 1px solid #30363d;
+  }
+
+  /* Line styling inside code blocks */
+  .prose pre code [data-line] {
+    padding: 0 1rem;
+    margin: 0 -1rem;
+    border-left: 2px solid transparent;
+  }
+
+  .prose pre code .highlighted {
+    background-color: rgba(200, 200, 255, 0.1);
+    border-left-color: #60a5fa;
+  }
+
+  .dark .prose pre code .highlighted {
+    background-color: rgba(56, 139, 253, 0.15);
+    border-left-color: #58a6ff;
   }
 
   .prose pre code {
