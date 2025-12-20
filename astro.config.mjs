@@ -9,7 +9,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yourdomain.com',
+  site: 'https://kumpul4semut.com',
   integrations: [
     mdx(),
     sitemap(),
