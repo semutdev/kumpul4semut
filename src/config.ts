@@ -18,6 +18,10 @@ export const SITE_CONFIG = {
   },
   adsense: {
     publisherId: import.meta.env.ADSENSE_PUBLISHER_ID || "",
+    slotIds: {
+      home: import.meta.env.ADSENSE_SLOT_HOME || "",
+      article: import.meta.env.ADSENSE_SLOT_ARTICLE || "",
+    },
   },
   pagination: {
     postsPerPage: 12,
